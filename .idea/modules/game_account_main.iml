@@ -33,7 +33,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-starter-logging:1.5.15.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:1.5.15.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.grails:grails-core:3.3.8" level="project" />
     <orderEntry type="module-library" scope="RUNTIME">
       <library>
         <CLASSES>
@@ -43,6 +42,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.grails:grails-core:3.3.8" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-starter-actuator:1.5.15.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:1.5.15.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.grails:grails-web-boot:3.3.8" level="project" />
@@ -70,8 +70,8 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot:1.5.15.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.tomcat:tomcat-jdbc:8.5.32" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.codehaus.groovy:groovy:2.4.15" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.bertramlabs.plugins:asset-pipeline-grails:2.14.8" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:1.4.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-core:4.3.18.RELEASE" level="project" />
