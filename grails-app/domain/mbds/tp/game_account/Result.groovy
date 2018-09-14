@@ -1,7 +1,6 @@
 package mbds.tp.game_account
 
-class Match {
-
+class Result {
     User winner
     int winnersScore
     User loser

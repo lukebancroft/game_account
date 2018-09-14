@@ -3,7 +3,7 @@ package mbds.tp.game_account
 import grails.gorm.services.Service
 
 @Service(Result)
-interface MatchService {
+interface ResultService {
 
     Result get(Serializable id)
 
@@ -13,6 +13,6 @@ interface MatchService {
 
     void delete(Serializable id)
 
-    Result save(Result match)
+    Result save(Result result)
 
 }

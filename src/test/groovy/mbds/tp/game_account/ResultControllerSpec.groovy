@@ -5,7 +5,7 @@ import grails.testing.web.controllers.ControllerUnitTest
 import grails.validation.ValidationException
 import spock.lang.*
 
-class MatchControllerSpec extends Specification implements ControllerUnitTest<MatchController>, DomainUnitTest<Result> {
+class ResultControllerSpec extends Specification implements ControllerUnitTest<ResultController>, DomainUnitTest<Result> {
 
     def populateValidParams(params) {
         assert params != null
@@ -17,7 +17,7 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
 
     void "Test the index action returns the correct model"() {
         given:
-        controller.matchService = Mock(MatchService) {
+        controller.resultService = Mock(ResultService) {
             1 * list(_) >> []
             1 * count() >> 0
         }
@@ -26,8 +26,8 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         controller.index()
 
         then:"The model is correct"
-        !model.matchList
-        model.matchCount == 0
+        !model.resultList
+        model.resultCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -35,7 +35,7 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         controller.create()
 
         then:"The model is correctly created"
-        model.match!= null
+        model.result!= null
     }
 
     void "Test the save action with a null instance"() {
@@ -45,13 +45,13 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         controller.save(null)
 
         then:"A 404 error is returned"
-        response.redirectedUrl == '/match/index'
+        response.redirectedUrl == '/result/index'
         flash.message != null
     }
 
     void "Test the save action correctly persists"() {
         given:
-        controller.matchService = Mock(MatchService) {
+        controller.resultService = Mock(ResultService) {
             1 * save(_ as Result)
         }
 
@@ -60,38 +60,38 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
         populateValidParams(params)
-        def match = new Result(params)
-        match.id = 1
+        def result = new Result(params)
+        result.id = 1
 
-        controller.save(match)
+        controller.save(result)
 
         then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/match/show/1'
+        response.redirectedUrl == '/result/show/1'
         controller.flash.message != null
     }
 
     void "Test the save action with an invalid instance"() {
         given:
-        controller.matchService = Mock(MatchService) {
-            1 * save(_ as Result) >> { Result match ->
-                throw new ValidationException("Invalid instance", match.errors)
+        controller.resultService = Mock(ResultService) {
+            1 * save(_ as Result) >> { Result result ->
+                throw new ValidationException("Invalid instance", result.errors)
             }
         }
 
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
-        def match = new Result()
-        controller.save(match)
+        def result = new Result()
+        controller.save(result)
 
         then:"The create view is rendered again with the correct model"
-        model.match != null
+        model.result != null
         view == 'create'
     }
 
     void "Test the show action with a null id"() {
         given:
-        controller.matchService = Mock(MatchService) {
+        controller.resultService = Mock(ResultService) {
             1 * get(null) >> null
         }
 
@@ -104,7 +104,7 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
 
     void "Test the show action with a valid id"() {
         given:
-        controller.matchService = Mock(MatchService) {
+        controller.resultService = Mock(ResultService) {
             1 * get(2) >> new Result()
         }
 
@@ -112,12 +112,12 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         controller.show(2)
 
         then:"A model is populated containing the domain instance"
-        model.match instanceof Result
+        model.result instanceof Result
     }
 
     void "Test the edit action with a null id"() {
         given:
-        controller.matchService = Mock(MatchService) {
+        controller.resultService = Mock(ResultService) {
             1 * get(null) >> null
         }
 
@@ -130,7 +130,7 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
 
     void "Test the edit action with a valid id"() {
         given:
-        controller.matchService = Mock(MatchService) {
+        controller.resultService = Mock(ResultService) {
             1 * get(2) >> new Result()
         }
 
@@ -138,7 +138,7 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         controller.edit(2)
 
         then:"A model is populated containing the domain instance"
-        model.match instanceof Result
+        model.result instanceof Result
     }
 
 
@@ -149,13 +149,13 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         controller.update(null)
 
         then:"A 404 error is returned"
-        response.redirectedUrl == '/match/index'
+        response.redirectedUrl == '/result/index'
         flash.message != null
     }
 
     void "Test the update action correctly persists"() {
         given:
-        controller.matchService = Mock(MatchService) {
+        controller.resultService = Mock(ResultService) {
             1 * save(_ as Result)
         }
 
@@ -164,21 +164,21 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
         populateValidParams(params)
-        def match = new Result(params)
-        match.id = 1
+        def result = new Result(params)
+        result.id = 1
 
-        controller.update(match)
+        controller.update(result)
 
         then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/match/show/1'
+        response.redirectedUrl == '/result/show/1'
         controller.flash.message != null
     }
 
     void "Test the update action with an invalid instance"() {
         given:
-        controller.matchService = Mock(MatchService) {
-            1 * save(_ as Result) >> { Result match ->
-                throw new ValidationException("Invalid instance", match.errors)
+        controller.resultService = Mock(ResultService) {
+            1 * save(_ as Result) >> { Result result ->
+                throw new ValidationException("Invalid instance", result.errors)
             }
         }
 
@@ -188,7 +188,7 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         controller.update(new Result())
 
         then:"The edit view is rendered again with the correct model"
-        model.match != null
+        model.result != null
         view == 'edit'
     }
 
@@ -199,13 +199,13 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         controller.delete(null)
 
         then:"A 404 is returned"
-        response.redirectedUrl == '/match/index'
+        response.redirectedUrl == '/result/index'
         flash.message != null
     }
 
     void "Test the delete action with an instance"() {
         given:
-        controller.matchService = Mock(MatchService) {
+        controller.resultService = Mock(ResultService) {
             1 * delete(2)
         }
 
@@ -215,7 +215,7 @@ class MatchControllerSpec extends Specification implements ControllerUnitTest<Ma
         controller.delete(2)
 
         then:"The user is redirected to index"
-        response.redirectedUrl == '/match/index'
+        response.redirectedUrl == '/result/index'
         flash.message != null
     }
 }

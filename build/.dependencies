@@ -24,6 +24,7 @@ dependencies:
 - file:/Users/Luke/.gradle/caches/modules-2/files-2.1/com.h2database/h2/1.4.197/bb391050048ca8ae3e32451b5a3714ecd3596a46/h2-1.4.197.jar
 - file:/Users/Luke/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-jdbc/8.5.32/9d2bf02f75c1f72b5346b60263d44b1a1ab8da43/tomcat-jdbc-8.5.32.jar
 - file:/Users/Luke/.gradle/caches/modules-2/files-2.1/com.bertramlabs.plugins/asset-pipeline-grails/2.14.8/b7a8bc6c1a6d7c499cd1a001d6d886365062b9e7/asset-pipeline-grails-2.14.8.jar
+- file:/Users/Luke/.gradle/caches/modules-2/files-2.1/mysql/mysql-connector-java/5.1.40/ef2a2ceab1735eaaae0b5d1cccf574fb7c6e1c52/mysql-connector-java-5.1.40.jar
 - file:/Users/Luke/.gradle/caches/modules-2/files-2.1/org.grails/grails-gorm-testing-support/1.1.4/b0bb89698013de97e7385fe166afbf44b44de32f/grails-gorm-testing-support-1.1.4.jar
 - file:/Users/Luke/.gradle/caches/modules-2/files-2.1/org.grails/grails-web-testing-support/1.1.4/79e6a7a8fd5cdc30023e87119ae34282efbd54c9/grails-web-testing-support-1.1.4.jar
 - file:/Users/Luke/.gradle/caches/modules-2/files-2.1/org.grails.plugins/geb/1.1.2/fdc1429c3f001e9e8d45cfb0f52ffe9b13e48221/geb-1.1.2.jar

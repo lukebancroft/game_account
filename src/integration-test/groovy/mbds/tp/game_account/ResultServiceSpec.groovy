@@ -7,37 +7,37 @@ import org.hibernate.SessionFactory
 
 @Integration
 @Rollback
-class MatchServiceSpec extends Specification {
+class ResultServiceSpec extends Specification {
 
-    MatchService matchService
+    ResultService resultService
     SessionFactory sessionFactory
 
     private Long setupData() {
         // TODO: Populate valid domain instances and return a valid ID
         //new Result(...).save(flush: true, failOnError: true)
         //new Result(...).save(flush: true, failOnError: true)
-        //Result match = new Result(...).save(flush: true, failOnError: true)
+        //Result result = new Result(...).save(flush: true, failOnError: true)
         //new Result(...).save(flush: true, failOnError: true)
         //new Result(...).save(flush: true, failOnError: true)
         assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //match.id
+        //result.id
     }
 
     void "test get"() {
         setupData()
 
         expect:
-        matchService.get(1) != null
+        resultService.get(1) != null
     }
 
     void "test list"() {
         setupData()
 
         when:
-        List<Result> matchList = matchService.list(max: 2, offset: 2)
+        List<Result> resultList = resultService.list(max: 2, offset: 2)
 
         then:
-        matchList.size() == 2
+        resultList.size() == 2
         assert false, "TODO: Verify the correct instances are returned"
     }
 
@@ -45,30 +45,30 @@ class MatchServiceSpec extends Specification {
         setupData()
 
         expect:
-        matchService.count() == 5
+        resultService.count() == 5
     }
 
     void "test delete"() {
-        Long matchId = setupData()
+        Long resultId = setupData()
 
         expect:
-        matchService.count() == 5
+        resultService.count() == 5
 
         when:
-        matchService.delete(matchId)
+        resultService.delete(resultId)
         sessionFactory.currentSession.flush()
 
         then:
-        matchService.count() == 4
+        resultService.count() == 4
     }
 
     void "test save"() {
         when:
         assert false, "TODO: Provide a valid instance to save"
-        Result match = new Result()
-        matchService.save(match)
+        Result result = new Result()
+        resultService.save(result)
 
         then:
-        match.id != null
+        result.id != null
     }
 }

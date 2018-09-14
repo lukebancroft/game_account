@@ -1,6 +1,5 @@
 package mbds.tp.game_account
 
-import grails.plugin.springsecurity.annotation.Secured
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import grails.compiler.GrailsCompileStatic
@@ -32,8 +31,8 @@ class User implements Serializable {
 	    password column: '`password`'
     }
 
-    static hasMany = [matchWon: Match,
-                      matchLost: Match,
+    static hasMany = [matchWon: Result,
+                      matchLost: Result,
                       messageSent: Message,
                       messageReceived: Message]
 
