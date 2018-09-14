@@ -1,6 +1,7 @@
 package game_account
 
 import grails.testing.gorm.DomainUnitTest
+import mbds.tp.game_account.User
 import spock.lang.Specification
 
 class UserSpec extends Specification implements DomainUnitTest<User> {
