@@ -13,7 +13,7 @@ class BootStrap {
         def userRole = new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
 
         def user1 = new User(username: 'admin', password: '123').save(flush: true, failOnError: true)
-        def user2 = new User(username: 'Player Two', password: '123').save(flush: true, failOnError: true)
+        def user2 = new User(username: 'player', password: '123').save(flush: true, failOnError: true)
 
         UserRole.create(user1, adminRole, true)
         UserRole.create(user2, userRole, true)
