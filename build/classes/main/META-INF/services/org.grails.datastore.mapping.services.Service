@@ -1,13 +1,3 @@
-mbds.tp.game_account.$UserRoleServiceImplementation
-mbds.tp.game_account.$MatchServiceImplementation
-mbds.tp.game_account.$UserServiceImplementation
-mbds.tp.game_account.$MessageServiceImplementation
-mbds.tp.game_account.$RoleServiceImplementation
-mbds.tp.game_account.$MatchServiceImplementation
-mbds.tp.game_account.$MessageServiceImplementation
-mbds.tp.game_account.$RoleServiceImplementation
-mbds.tp.game_account.$UserRoleServiceImplementation
-mbds.tp.game_account.$UserServiceImplementation
 mbds.tp.game_account.$MatchServiceImplementation
 mbds.tp.game_account.$MessageServiceImplementation
 mbds.tp.game_account.$ResultServiceImplementation

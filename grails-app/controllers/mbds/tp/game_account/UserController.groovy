@@ -1,11 +1,17 @@
 package mbds.tp.game_account
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
+import org.springframework.web.multipart.commons.CommonsMultipartFile
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest
+
+import javax.imageio.ImageIO
+
 import static org.springframework.http.HttpStatus.*
 
 @Secured('ROLE_ADMIN')
-class UserController {
+public class UserController {
 
     UserService userService
 
@@ -96,6 +102,27 @@ class UserController {
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
+        }
+    }
+
+    def uploadFile() {
+        if (params.file && ImageIO.read(params.file.getInputStream())) {
+            def fileName = "${UUID.randomUUID().toString()}${Long.toString(Calendar.getInstance().getTimeInMillis())}.png"
+            def inputStream = params.file.getInputStream()
+
+            File storedFile = new File("${fileName}")
+            storedFile.append(inputStream)
+
+            def result = [:]
+            result.placeholder = '<img src="data:image/png;base64, ' + new String(new Base64().getEncoder().encode(storedFile.bytes), "UTF-8") + '" height="128px" width="128px" id=" ' + fileName +' class="uploadedImg"/>'
+            result.name = fileName
+            render result as JSON
+
+        } else {
+            def result = [:]
+            result.placeholder = "<p class='alert alert-danger'><strong>Uploaded file must be an image (128KB max.)</strong></p>"
+            result.name = null
+            render result as JSON
         }
     }
 }

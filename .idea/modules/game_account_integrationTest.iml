@@ -5,7 +5,7 @@
       <configuration />
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../../out/integrationTest/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../src/integration-test">
@@ -209,5 +209,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.eclipse.jetty.websocket:websocket-common:9.4.11.v20180605" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.eclipse.jetty:jetty-http:9.4.11.v20180605" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.eclipse.jetty.websocket:websocket-api:9.4.11.v20180605" level="project" />
+    <orderEntry type="library" name="groovy-2.5.2" level="application" />
   </component>
 </module>
