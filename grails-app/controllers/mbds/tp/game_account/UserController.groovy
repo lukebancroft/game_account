@@ -3,8 +3,6 @@ package mbds.tp.game_account
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
-import org.springframework.web.multipart.commons.CommonsMultipartFile
-import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest
 
 import javax.imageio.ImageIO
 
@@ -107,14 +105,21 @@ public class UserController {
 
     def uploadFile() {
         if (params.file && ImageIO.read(params.file.getInputStream())) {
-            def fileName = "${UUID.randomUUID().toString()}${Long.toString(Calendar.getInstance().getTimeInMillis())}.png"
-            def inputStream = params.file.getInputStream()
+            def cdnRootUrl = grailsApplication.config.getProperty("grails.guides.cdnRootUrl")
+            def cdnFolderPath = grailsApplication.config.getProperty("grails.guides.cdnFolder")
 
-            File storedFile = new File("${fileName}")
-            storedFile.append(inputStream)
+            def fileName = "${UUID.randomUUID().toString()}${Long.toString(Calendar.getInstance().getTimeInMillis())}.png"
+
+            File folder = new File(cdnFolderPath)
+            if ( !folder.exists() ) {
+                folder.mkdirs()
+            }
+
+            String path = "${cdnFolderPath}/${fileName}"
+            params.file.transferTo(new File(path))
 
             def result = [:]
-            result.placeholder = '<img src="data:image/png;base64, ' + new String(new Base64().getEncoder().encode(storedFile.bytes), "UTF-8") + '" height="128px" width="128px" id=" ' + fileName +' class="uploadedImg"/>'
+            result.placeholder = '<img src="' + "${cdnRootUrl}/${fileName}" + '" height="128px" width="128px" id=" ' + fileName +' class="uploadedImg"/>'
             result.name = fileName
             render result as JSON
 

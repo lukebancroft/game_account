@@ -9,8 +9,8 @@ grails:
             # Disabled by default for performance reasons
             events: false
     guides:
-        cdnFolder: /htdocs/tpGrails/userAvatars
-        cdnRootUrl: http://localhost:8888
+        cdnFolder: /Users/Luke/Sites/tpGrails
+        cdnRootUrl: http://localhost:8888/tpGrails
 info:
     app:
         name: '@info.app.name@'

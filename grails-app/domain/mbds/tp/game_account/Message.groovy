@@ -5,7 +5,12 @@ class Message {
     User author
     User target
     String content
+    boolean isRead
 
     static constraints = {
+        author nullable: false, blank: false
+        target nullable: false, blank: false
+        content nullable: false
+        isRead nullable: false
     }
 }
