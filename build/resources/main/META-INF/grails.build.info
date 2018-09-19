@@ -1,6 +1,0 @@
-#Fri, 14 Sep 2018 16:23:04 +0200
-
-info.app.version=0.1
-info.app.name=game_account
-grails.env=development
-info.app.grailsVersion=3.3.8
