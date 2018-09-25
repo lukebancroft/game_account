@@ -61,6 +61,7 @@ dependencies {
 
     compile 'org.grails.plugins:spring-security-core:3.2.3'
     runtime 'mysql:mysql-connector-java:5.1.40'
+    compile 'org.grails.plugins:quartz:2.0.13'
 }
 
 bootRun {
