@@ -18,6 +18,7 @@ class User implements Serializable {
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
+    boolean isDeleted = false
 
     Set<Role> getAuthorities() {
         (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
@@ -27,6 +28,7 @@ class User implements Serializable {
         password nullable: false, blank: false, password: true
         username nullable: false, blank: false, unique: true
         avatar nullable: true
+        avatar nullable: false
     }
 
     static mapping = {
@@ -42,4 +44,11 @@ class User implements Serializable {
                        matchLost: "loser",
                        messageSent: "author",
                        messageReceived: "target"]
+
+    static namedQueries = {
+        //namedQuery pour ne pas afficher les utilisateurs supprimés
+        notDeleted {
+            ne 'isDeleted', true
+        }
+    }
 }
