@@ -82,7 +82,19 @@
 </div>
 
 <div class="col-md-12">
+    <div id="content" role="main">
+        <section class="row colset-2-its">
+            <div class="col-md-2">
+
+            </div>
+
+            <div class="col-md-10">
     <g:layoutBody/>
+            </div>
+    </div>
+</div>
+</section>
+</div>
     <div/>
 
     <!-- <div class="footer" role="contentinfo"></div> -->

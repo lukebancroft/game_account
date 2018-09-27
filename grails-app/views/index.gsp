@@ -6,35 +6,26 @@
 </head>
 
 <body>
+<h1>Bienvenue sur l'Interface Admin</h1>
 
-<div id="content" role="main">
-    <section class="row colset-2-its">
-        <div class="col-md-2">
+<p>
+    Congratulations, you have successfully started your first Grails application! At the moment
+    this is the default page, feel free to modify it to either redirect to a controller or display
+    whatever content you may choose. Below is a list of controllers that are currently deployed in
+    this application, click on each to execute its default action:
+</p>
 
-        </div>
-
-        <div class="col-md-10">
-            <h1>Bienvenue sur l'Interface Admin</h1>
-
-            <p>
-                Congratulations, you have successfully started your first Grails application! At the moment
-                this is the default page, feel free to modify it to either redirect to a controller or display
-                whatever content you may choose. Below is a list of controllers that are currently deployed in
-                this application, click on each to execute its default action:
-            </p>
-
-            <div id="controllers" role="navigation">
-                <h2>Statistique des entités:</h2>
-                <ul>
-                    <g:each var="c" in="${grailsApplication.getDomainClasses()}">
-                        <li class="controller">
-                            Nombre de ${c.name} : ${grailsApplication.getClassForName(c.fullName).count()}
-                        </li>
-                    </g:each>
-                </ul>
+<div id="controllers" role="navigation">
+    <h2>Statistique des entités:</h2>
+    <div class="col-md-12">
+        <g:each var="c" in="${grailsApplication.getDomainClasses()}">
+            <div class="panel panel-default col-md-6">
+                <div class="panel-body">
+                    <h4>Nombre de ${c.name} : ${grailsApplication.getClassForName(c.fullName).count()}</h4>
+                </div>
             </div>
-        </div>
-    </section>
+        </g:each>
+    </div>
 </div>
 
 <script>
