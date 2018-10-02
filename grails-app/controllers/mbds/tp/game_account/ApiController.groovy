@@ -11,17 +11,20 @@ class ApiController {
     {
         switch(request.getMethod()) {
             case "GET":
-                def userInstance = User.get(params.id)
+                def userInstance
+                userInstance = params.id ? User.get(params.id) : userInstance
+                userInstance = (!userInstance && params.username) ? User.findByUsername(params.username) : userInstance
+
                 if(!userInstance){
                     render(status: 404, text: "User with id ${params.id} does not exist")
                     return
                 }
                 switch(request.getHeader("Accept")){
                     case "application/json":
-                        render userInstance as JSON
+                        render (status: 200, userInstance as JSON)
                         break
                     case "application/xml":
-                        render userInstance as XML
+                        render (status: 200, userInstance as XML)
                         break
                     default:
                         render(status: 400, text: "Cannot return user with header type : ${request.getHeader("Accept")}")
@@ -68,27 +71,55 @@ class ApiController {
                 break
 
             case "DELETE":
-                if(!User.get(params.id)) {
+                def userInstance
+                userInstance = params.id ? User.get(params.id) : userInstance
+                userInstance = (!userInstance && params.username) ? User.findByUsername(params.username) : userInstance
+
+                if(!userInstance) {
                     render(status: 404, text: "User with id ${params.id} does not exist")
                     return
                 }
                 else {
-                    User userInstance = User.get(params.id)
                     userInstance.setIsDeleted(true)
                     if(userInstance.save(flush:true))
                     {
-                        render(status: 200, text: "User ${params.id} deleted")
+                        render(status: 200, text: "User successfully deleted")
                     }
                     else
                     {
-                        render(status: 400, text: "User ${params.id} couldn't be deleted")
+                        render(status: 400, text: "User couldn't be deleted")
                     }
                 }
                 break;
 
             default:
-                render(status: 400, text: "Bad request")
+                render(status: 405, text: "Method not allowed")
                 break
+        }
+    }
+
+    def users()
+    {
+        switch(request.getMethod())
+        {
+            case "GET":
+                List<User> UsersInstance = User.getAll()
+                switch (request.getHeader("Accept"))
+                {
+                    case "application/json":
+                        render(status: 200, UsersInstance as JSON)
+                        break
+                    case "application/xml":
+                        render(status: 200, UsersInstance as XML)
+                        break
+                    default:
+                        render(status: 400, text: "Cannot return users with header type : ${request.getHeader("Accept")}")
+                        break
+                }
+
+            default:
+                render(status: 405, text: "Method not allowed")
+                break;
         }
     }
 }
