@@ -23,14 +23,14 @@
     <g:form resource="${this.result}" method="POST">
         <fieldset class="form">
             <f:with bean="result">
-                <f:field property="winner" class="form-control"/>
-                <f:field property="loser" class="form-control"/>
+                <f:field property="winner" class="form-control"/><br/>
+                <f:field property="loser" class="form-control"/><br/>
                 <f:field property="losersScore" class="form-control">
                     <g:textField name="losersScore" class="form-control" placeholder="Enter loser's score"/>
-                </f:field>
+                </f:field><br/>
                 <f:field property="winnersScore" class="form-control">
                     <g:textField name="winnersScore" class="form-control" placeholder="Enter winner's score"/>
-                </f:field>
+                </f:field><br/><br/>
             </f:with>
         </fieldset>
         <fieldset class="buttons">

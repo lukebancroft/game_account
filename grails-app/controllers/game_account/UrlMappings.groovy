@@ -8,7 +8,10 @@ class UrlMappings {
             }
         }
 
-        "/user"(controller: "api", action: "user")
+        "/api/user"(controller: "api", action: "user")
+        "/api/users"(controller: "api", action: "users")
+        "/api/message"(controller: "api", action: "message")
+        "/api/messages"(controller: "api", action: "messages")
 
         "/"(view:"/index")
         "500"(view:'/error')

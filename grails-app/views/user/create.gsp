@@ -75,9 +75,9 @@
                 </f:field>
             </f:with>
             <div class="col-md-12">
-                <g:select name="role.authority" from="${roleService.list()}" value="${role?.id}" optionKey="id" />
+                <br/><g:select name="role.authority" from="${roleService.list()}" value="${role?.id}" optionKey="id" />
             </div>
-        </fieldset><br/>
+        </fieldset><br/><br/>
         <fieldset class="buttons">
             <g:submitButton name="create" class="save btn btn-default"
                             value="${message(code: 'default.button.create.label', default: 'Create')}"/>

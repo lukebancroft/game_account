@@ -26,6 +26,9 @@ class ApiController {
                     case "application/xml":
                         render (status: 200, userInstance as XML)
                         break
+                    case "*/*":
+                        render(status: 200, userInstance as JSON)
+                        break
                     default:
                         render(status: 400, text: "Cannot return user with header type : ${request.getHeader("Accept")}")
                         break
@@ -103,19 +106,145 @@ class ApiController {
         switch(request.getMethod())
         {
             case "GET":
-                List<User> UsersInstance = User.getAll()
+                List<User> usersInstance = User.getAll()
                 switch (request.getHeader("Accept"))
                 {
                     case "application/json":
-                        render(status: 200, UsersInstance as JSON)
+                        render(status: 200, usersInstance as JSON)
                         break
                     case "application/xml":
-                        render(status: 200, UsersInstance as XML)
+                        render(status: 200, usersInstance as XML)
+                        break
+                    case "*/*":
+                        render(status: 200, usersInstance as JSON)
                         break
                     default:
                         render(status: 400, text: "Cannot return users with header type : ${request.getHeader("Accept")}")
                         break
                 }
+                break
+
+            default:
+                render(status: 405, text: "Method not allowed")
+                break;
+        }
+    }
+
+    def message()
+    {
+        switch(request.getMethod()) {
+            case "GET":
+                def messageInstance
+                messageInstance = Message.get(params.id)
+
+                if(!messageInstance){
+                    render(status: 404, text: "Message with id ${params.id} does not exist")
+                    return
+                }
+                switch(request.getHeader("Accept")){
+                    case "application/json":
+                        render (status: 200, messageInstance as JSON)
+                        break
+                    case "application/xml":
+                        render (status: 200, messageInstance as XML)
+                        break
+                    case "*/*":
+                        render(status: 200, messageInstance as JSON)
+                        break
+                    default:
+                        render(status: 400, text: "Cannot return message with header type : ${request.getHeader("Accept")}")
+                        break
+                }
+                break
+
+            case "POST":
+                if (User.get(params.authorId) && User.get(params.targetId)) {
+                    params.author = User.get(params.authorId)
+                    params.target = User.get(params.targetId)
+
+                    def messageInstance = new Message(params)
+                    if (messageInstance.save(flush: true)) {
+                        render(status: 201, text: "Message created successfully with id : ${messageInstance.getId()}")
+                    }
+                } else {
+                    render(status: 400, text: "Message not created, check parameters and try again")
+                }
+                break
+
+            case "PUT":
+                if(!Message.get(params.id)) {
+                    render(status: 404, text: "Message with id ${params.id} does not exist")
+                    return
+                }
+
+                Message messageInstance = Message.get(params.id)
+                def author = params.authorId ? User.get(params.authorId) : messageInstance.getAuthor()
+                def target = params.targetId ? User.get(params.targetId) : messageInstance.getTarget()
+                def content = params.content ? params.content : messageInstance.getContent()
+                def isRead = params.isRead ? params.isRead : messageInstance.getIsRead()
+
+                messageInstance. setAuthor(author)
+                messageInstance.setTarget(target)
+                messageInstance.setContent(content)
+                messageInstance.setIsRead(isRead)
+
+                if(messageInstance.save(flush:true))
+                {
+                    render(status: 200, text: "Message with id ${messageInstance.getId()} updated successfully")
+                }
+                else
+                {
+                    render(status: 400, text: "Message couldn't be updated, check parameters and try again")
+                }
+                break
+
+            case "DELETE":
+                def messageInstance = Message.get(params.id)
+
+                if(!messageInstance) {
+                    render(status: 404, text: "Message with id ${params.id} does not exist")
+                    return
+                } else {
+                    messageInstance.delete(flush:true)
+                    if(!Message.get(params.id))
+                    {
+                        render(status: 200, text: "Message successfully deleted")
+                    }
+                    else
+                    {
+                        render(status: 400, text: "Message couldn't be deleted")
+                    }
+                }
+                break;
+
+            default:
+                render(status: 405, text: "Method not allowed")
+                break
+        }
+    }
+
+    def messages()
+    {
+        switch(request.getMethod())
+        {
+            case "GET":
+                List<Message> messagesInstance = Message.getAll()
+                switch (request.getHeader("Accept"))
+                {
+                    case "application/json":
+                        render(status: 200, messagesInstance as JSON)
+                        break
+                    case "application/xml":
+                        render(status: 200, messagesInstance as XML)
+                        break
+                    case "*/*":
+                        render(status: 200, messagesInstance as JSON)
+                        break
+                    default:
+                        render(status: 400, text: "Cannot return messages with header type : ${request.getHeader("Accept")}")
+                        break
+                }
+                break
 
             default:
                 render(status: 405, text: "Method not allowed")
