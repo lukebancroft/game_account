@@ -251,4 +251,121 @@ class ApiController {
                 break;
         }
     }
+
+    //Result
+    def result()
+    {
+        switch(request.getMethod()) {
+            case "GET":
+                def resultInstance
+                resultInstance = Result.get(params.id)
+
+                if(!resultInstance){
+                    render(status: 404, text: "Result with id ${params.id} does not exist")
+                    return
+                }
+                switch(request.getHeader("Accept")){
+                    case "application/json":
+                        render (status: 200, resultInstance as JSON)
+                        break
+                    case "application/xml":
+                        render (status: 200, resultInstance as XML)
+                        break
+                    default:
+                        render(status: 400, text: "Cannot return result with header type : ${request.getHeader("Accept")}")
+                        break
+                }
+                break
+
+            case "POST":
+                def resultInstance = new Result(params)
+                if(resultInstance.save(flush:true))
+                {
+                    render(status: 201, text: "Result match ${resultInstance.getId()} between ${resultInstance.getLoser().getUsername()} and ${resultInstance.getWinner().getUsername()} created successfully")
+                }
+                else
+                {
+                    render(status: 400, text: "Result not created, check parameters and try again")
+                }
+                break
+
+            case "PUT":
+                if(!Result.get(params.id)) {
+                    render(status: 404, text: "Result with id ${params.id} does not exist")
+                    return
+                }
+
+                Result resultInstance = Result.get(params.id)
+                def winner = params.winnerId ? User.get(params.winnerId) : resultInstance.getWinner()
+                def loser = params.loserId ? User.get(params.loserId) : resultInstance.getLoser()
+                def winnersScore = params.winnersScore ? params.winnersScore : resultInstance.getWinnersScore()
+                def losersScore = params.losersScore ? params.losersScore : resultInstance.getLosersScore()
+
+                println params
+                resultInstance.setWinner(winner)
+                resultInstance.setLoser(loser)
+                resultInstance.setWinnersScore(Integer.parseInt(winnersScore))
+                resultInstance.setLosersScore(Integer.parseInt(losersScore))
+
+                if(resultInstance.save(flush:true))
+                {
+                    render(status: 200, text: "Result ${resultInstance.getId()} updated successfully")
+                }
+                else
+                {
+                    render(status: 400, text: "Result ${resultInstance.getId()} couldn't be updated")
+                }
+                break
+
+            case "DELETE":
+                def resultInstance
+                resultInstance = Result.get(params.id)
+
+                if(!resultInstance) {
+                    render(status: 404, text: "Result with id ${params.id} does not exist")
+                    return
+                }
+                else {
+                    resultInstance.delete(flush:true)
+                    if(!Result.get(params.id))
+                    {
+                        render(status: 200, text: "Result successfully deleted")
+                    }
+                    else
+                    {
+                        render(status: 400, text: "Result couldn't be deleted")
+                    }
+                }
+                break;
+
+            default:
+                render(status: 405, text: "Method not allowed")
+                break
+        }
+    }
+
+    def results()
+    {
+        switch(request.getMethod())
+        {
+            case "GET":
+                List<Result> resultsInstance = Result.getAll()
+                switch (request.getHeader("Accept"))
+                {
+                    case "application/json":
+                        render(status: 200, resultsInstance as JSON)
+                        break
+                    case "application/xml":
+                        render(status: 200, resultsInstance as XML)
+                        break
+                    default:
+                        render(status: 400, text: "Cannot return results with header type : ${request.getHeader("Accept")}")
+                        break
+                }
+
+            default:
+                render(status: 405, text: "Method not allowed")
+                break;
+        }
+    }
 }
