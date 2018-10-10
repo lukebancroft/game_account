@@ -1,7 +1,9 @@
+<%@ page import="mbds.tp.game_account.User" %>
 <!doctype html>
 <html>
 <head>
     <meta name="layout" content="main"/>
+    <asset:stylesheet src="stats.css"/>
     <title>Welcome to Grails</title>
 </head>
 
@@ -16,34 +18,95 @@
 </p>
 
 <div id="controllers" role="navigation">
-    <h2>Statistique des entités:</h2>
+    <h2>Statistiques des entités:</h2>
     <div class="col-md-12">
-        <g:each var="c" in="${grailsApplication.getDomainClasses()}">
-            <div class="panel panel-default col-md-6">
-                <div class="panel-body">
-                    <h4>Nombre de ${c.name} : ${grailsApplication.getClassForName(c.fullName).count()}</h4>
+        <div class="col-md-4">
+            <div class="circle-tile ">
+                <a href="/user"><div class="circle-tile-heading dark-blue text-offwhite"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
+                <div class="circle-tile-content dark-blue">
+                    <div class="circle-tile-description text-faded">USERS</div>
+                    <div class="circle-tile-number text-faded ">${grailsApplication.classLoader.loadClass(mbds.tp.game_account.User.getName()).count()}</div>
+                    <a class="circle-tile-footer" href="/user">More Info <i class="fa fa-chevron-circle-right"></i></a>
                 </div>
             </div>
-        </g:each>
+        </div>
+        <div class="col-md-4">
+            <div class="circle-tile ">
+                <a href="/result"><div class="circle-tile-heading dark-blue text-orange"><i class="fa fa-fire fa-fw fa-3x"></i></div></a>
+                <div class="circle-tile-content dark-blue">
+                    <div class="circle-tile-description text-faded">RESULTS</div>
+                    <div class="circle-tile-number text-faded ">${grailsApplication.classLoader.loadClass(mbds.tp.game_account.Result.getName()).count()}</div>
+                    <a class="circle-tile-footer" href="/result">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="circle-tile ">
+                <a href="/message"><div class="circle-tile-heading dark-blue text-offwhite"><i class="fa fa-envelope fa-fw fa-3x"></i></div></a>
+                <div class="circle-tile-content dark-blue">
+                    <div class="circle-tile-description text-faded">MESSAGES</div>
+                    <div class="circle-tile-number text-faded ">${grailsApplication.classLoader.loadClass(mbds.tp.game_account.Message.getName()).count()}</div>
+                    <a class="circle-tile-footer" href="/message">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-<script>
-    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-    var dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
+    <canvas id="myChart" width="400" height="100"></canvas>
+    <script>
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [
+                    moment().subtract(12, "months"),
+                    moment().subtract(11, "months"),
+                    moment().subtract(10, "months"),
+                    moment().subtract(9, "months"),
+                    moment().subtract(8, "months"),
+                    moment().subtract(7, "months"),
+                    moment().subtract(6, "months"),
+                    moment().subtract(5, "months"),
+                    moment().subtract(4, "months"),
+                    moment().subtract(3, "months"),
+                    moment().subtract(2, "months"),
+                    moment().subtract(1, "months"),
+                    moment()
+                ],
+                datasets: [{
+                    label: 'Parties',
+                    data: [4, 2, 10, 6, 8, 0, 1, 11, 5, 3, 5, 5, 8],
+                    lineTension: 0.2/*,
+                    pointBackgroundColor: "#FFFFFF",
+                    pointBorderColor: "#fed67e",
+                    borderColor: "#fed67e"*/
+                }],
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        type: 'time',
+                        position: 'bottom',
+                        distribution: 'linear',
+                        time: {
+                            displayFormats: {'day': 'MM/YY'},
+                            tooltipFormat: 'DD/MM/YY',
+                            unit: 'month',
+                            tooltipFormat: 'MMM. YYYY',
+                            min: moment().subtract(12, "months").format("DD-MM-YYYY 23:59:59"),
+                            max: moment().format("DD-MM-YYYY 23:59:59")
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Nombre de parties (Results) / mois'
+                }
             }
         });
-    }
-</script>
+    </script>
+</div>
 </body>
 </html>

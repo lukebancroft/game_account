@@ -10,9 +10,9 @@ h1 {
     z-index: 2;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #41495b;
     overflow-x: hidden;
-    padding-top: 80px;
+    /*padding-top: 45px;*/
 }
 
 /* Style the sidenav links and the dropdown button */
@@ -43,20 +43,35 @@ h1 {
 }
 
 /* Add an active class to the active dropdown button */
-.active {
-    background-color: #50a1ef !important;
-    color: white !important;
+.dropdown-btn {
+    background-color: #86c5da !important;
+    color: #f6f6f6 !important;
 }
 
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
     display: none;
-    background-color: #262626;
+    background-color: #41495b;
     padding-left: 8px;
+    display: block;
 }
 
 /* Optional: Style the caret down icon */
 .fa-caret-down {
     float: right;
     padding-right: 8px;
+}
+
+.top-nav, .navbar {
+    background-color: #fed67e;
+}
+
+.navbar-brand {
+    margin-bottom: 15px;
+}
+
+.topbar-btn {
+    padding-bottom: 15px !important;
+    padding-top: 15px !important;
+    text-shadow: 0 0 2px rgba(52, 73, 94, 0.4);
 }

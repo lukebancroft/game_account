@@ -4520,14 +4520,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: whitesmoke;
 }
 #accueil:hover,
-#accueil:focus {
-  color: #7FDD4C;
-  background-color: transparent;
-}
-
+#accueil:focus,
+#currentUser:hover,
+#currentUser:focus,
 #logout:hover,
 #logout:focus {
-  color: #DB1702;
+  color: #41495b;
   background-color: transparent;
 }
 
