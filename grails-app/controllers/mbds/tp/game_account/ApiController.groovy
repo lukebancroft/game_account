@@ -19,8 +19,7 @@ class ApiController {
                     render(status: 404, text: "User with id ${params.id} does not exist")
                     return
                 }
-                switch(request.getHeader("Accept")){
-                    case "application/json":
+                switch(request.getHeader("Accept")){case "application/json":
                         render (status: 200, userInstance as JSON)
                         break
                     case "application/xml":
@@ -28,9 +27,6 @@ class ApiController {
                         break
                     case "*/*":
                         render(status: 200, userInstance as JSON)
-                        break
-                    default:
-                        render(status: 400, text: "Cannot return user with header type : ${request.getHeader("Accept")}")
                         break
                 }
                 break
@@ -43,7 +39,6 @@ class ApiController {
                 }
                 else
                 {
-                    userInstance.errors.allErrors.each{println it}
                     render(status: 400, text: "User not created, check parameters and try again")
                 }
                 break
@@ -151,9 +146,6 @@ class ApiController {
                     case "*/*":
                         render(status: 200, messageInstance as JSON)
                         break
-                    default:
-                        render(status: 400, text: "Cannot return message with header type : ${request.getHeader("Accept")}")
-                        break
                 }
                 break
 
@@ -167,7 +159,7 @@ class ApiController {
                         render(status: 201, text: "Message created successfully with id : ${messageInstance.getId()}")
                     }
                 } else {
-                    render(status: 400, text: "Message not created, check parameters and try again")
+                    render(status: 404, text: "Message not created, check parameters and try again")
                 }
                 break
 
@@ -240,9 +232,6 @@ class ApiController {
                     case "*/*":
                         render(status: 200, messagesInstance as JSON)
                         break
-                    default:
-                        render(status: 400, text: "Cannot return messages with header type : ${request.getHeader("Accept")}")
-                        break
                 }
                 break
 
@@ -271,8 +260,8 @@ class ApiController {
                     case "application/xml":
                         render (status: 200, resultInstance as XML)
                         break
-                    default:
-                        render(status: 400, text: "Cannot return result with header type : ${request.getHeader("Accept")}")
+                    case "*/*":
+                        render(status: 200, resultInstance as JSON)
                         break
                 }
                 break
@@ -301,7 +290,6 @@ class ApiController {
                 def winnersScore = params.winnersScore ? params.winnersScore : resultInstance.getWinnersScore()
                 def losersScore = params.losersScore ? params.losersScore : resultInstance.getLosersScore()
 
-                println params
                 resultInstance.setWinner(winner)
                 resultInstance.setLoser(loser)
                 resultInstance.setWinnersScore(Integer.parseInt(winnersScore))
@@ -313,7 +301,7 @@ class ApiController {
                 }
                 else
                 {
-                    render(status: 400, text: "Result ${resultInstance.getId()} couldn't be updated")
+                    render(status: 404, text: "Result ${resultInstance.getId()} couldn't be updated, check parameters and try again")
                 }
                 break
 
@@ -358,8 +346,8 @@ class ApiController {
                     case "application/xml":
                         render(status: 200, resultsInstance as XML)
                         break
-                    default:
-                        render(status: 400, text: "Cannot return results with header type : ${request.getHeader("Accept")}")
+                    case "*/*":
+                        render(status: 200, resultsInstance as JSON)
                         break
                 }
 
