@@ -39,8 +39,8 @@
                 <div class="col-xs-12 col-sm-6 emphasis">
                     <h2><strong> ${user.matchLost.size()} </strong></h2>
                     <p><small>Match(es) lost</small></p>
-                    <g:form resource="${this.result}" method="PUT">
-                        <button class="btn btn-danger btn-block" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><span class="fa fa-times-circle"></span> Delete result </button><br/>
+                    <g:form resource="${this.user}" method="DELETE">
+                        <button class="btn btn-danger btn-block" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><span class="fa fa-times-circle"></span> Delete user </button><br/>
                     </g:form>
                     <a href="/user" class="nounderline"><button class="btn btn-primary btn-block"><span class="fa fa-server"></span> User list </button></a>
                 </div>
