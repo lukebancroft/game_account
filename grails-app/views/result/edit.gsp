@@ -3,17 +3,10 @@
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'result.label', default: 'Result')}" />
+        <g:set var="userService" bean="userService"/>
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#edit-result" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="edit-result" class="content scaffold-edit" role="main">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
@@ -29,10 +22,35 @@
             <g:form resource="${this.result}" method="PUT">
                 <g:hiddenField name="version" value="${this.result?.version}" />
                 <fieldset class="form">
-                    <f:all bean="result"/>
+                    <f:with bean="result">
+                        <f:field property="winner" class="form-control">
+                            <g:select id="winner"
+                                      name="winner"
+                                      optionKey="id"
+                                      from="${userService.list()}"
+                                      optionValue="username"
+                                      value="${result.winner.id}"
+                                      class="form-control"/>
+                        </f:field>
+                        <f:field property="loser" class="form-control">
+                            <g:select id="loser"
+                                      name="loser"
+                                      optionKey="id"
+                                      from="${userService.list()}"
+                                      optionValue="username"
+                                      value="${result.loser.id}"
+                                      class="form-control"/>
+                        </f:field>
+                        <f:field property="winnersScore" class="form-control">
+                            <g:textField name="winnersScore" class="form-control" placeholder="Enter winner's score" value="${result.winnersScore}"/>
+                        </f:field>
+                        <f:field property="losersScore" class="form-control">
+                            <g:textField name="losersScore" class="form-control" placeholder="Enter loser's score" value="${result.losersScore}"/>
+                        </f:field><br/>
+                    </f:with>
                 </fieldset>
                 <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <input class="save btn btn-default" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
             </g:form>
         </div>

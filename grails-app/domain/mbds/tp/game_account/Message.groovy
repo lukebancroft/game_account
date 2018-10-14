@@ -5,7 +5,7 @@ class Message {
     User author
     User target
     String content
-    boolean isRead
+    boolean isRead = false;
 
     static constraints = {
         author nullable: false, blank: false

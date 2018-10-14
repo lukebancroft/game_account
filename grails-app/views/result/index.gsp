@@ -22,17 +22,19 @@
             <th class="text-center">Winner's score</th>
             <th class="text-center">Loser</th>
             <th class="text-center">Loser's score</th>
+            <th class="text-center">Edit</th>
         </tr>
         </thead>
         <tbody>
         <g:each in="${resultList}" var="user" status="i">
             <tr>
-                <td class="text-center">${resultList.id[i]}</td>
+                <td class="text-center"><a href="/result/show/${resultList.id[i]}">${resultList.id[i]}</a></td>
                 <td class="text-center">${resultList.dateCreated[i]}</td>
-                <td class="text-center">${userService.get(resultList.winnerId[i]).username}</td>
+                <td class="text-center"><a href="/user/show/${userService.get(resultList.winnerId[i]).id}">${userService.get(resultList.winnerId[i]).username}</a></td>
                 <td class="text-center">${resultList.winnersScore[i]}</td>
-                <td class="text-center">${userService.get(resultList.loserId[i]).username}</td>
+                <td class="text-center"><a href="/user/show/${userService.get(resultList.loserId[i]).id}">${userService.get(resultList.loserId[i]).username}</a></td>
                 <td class="text-center">${resultList.losersScore[i]}</td>
+                <td class="text-center"><a href="/result/edit/${resultList.id[i]}" role="button"><i class="fas fa-edit" aria-hidden="true"></i>
             </tr>
         </g:each>
         </tbody>

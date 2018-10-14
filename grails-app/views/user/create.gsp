@@ -75,7 +75,13 @@
                 </f:field>
             </f:with>
             <div class="col-md-12">
-                <br/><g:select name="role.authority" from="${roleService.list()}" value="${role?.id}" optionKey="id" />
+                <br/><g:select id="roles"
+                      name="role.authority"
+                      optionKey="id"
+                      from="${roleService.list()}"
+                      optionValue="authority"
+                      value="id"
+                      class="form-control"/>
             </div>
         </fieldset><br/><br/>
         <fieldset class="buttons">

@@ -27,7 +27,7 @@
         <tbody>
         <g:each in="${userList}" var="user" status="i">
             <tr>
-                <td class="text-center">${userList.username[i]}</td>
+                <td class="text-center"><a href="/user/show/${userList.id[i]}">${userList.username[i]}</a></td>
                 <td class="text-center">${userList[i].getAuthorities().authority}</td>
                 <td class="text-center">${userList.matchWon[i].size()}</td>
                 <td class="text-center">${userList.matchLost[i].size()}</td>

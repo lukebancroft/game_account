@@ -89,13 +89,14 @@
 <div class="col-md-12">
     <div id="content" role="main">
         <section class="row colset-2-its">
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-3">
 
             </div>
 
-            <div class="col-md-10">
-    <g:layoutBody/>
+            <div class="col-md-10 col-sm-9">
+                <g:layoutBody/>
             </div>
+            </section>
     </div>
 </div>
 </section>
